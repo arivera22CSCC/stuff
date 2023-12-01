@@ -50,19 +50,18 @@ class="flex space-x-2">
 
 <input type= "text" name="body" value ="{{$tweet->body}}"
 class= "bg-white py-2 px-4 rounded-full text black w-full">
-<input type= "text" name="user-id" value ="{{$tweet->id}}"
-class= "bg-white py-2 px-4 rounded-full text black w-full">
+
 <input type= "text" name="TimeStamp" value ="{{$tweet->created_at}}"
 class= "bg-white py-2 px-4 rounded-full text black w-full">
 <button type="submit" class="bg-blue-300 text-blue-900 py-3 
 px-4 rounded-full text-black "> Edit </button>
-<button type= "submit" class=" bg-orange-400 text-blue-900 py-3 px-4 rounded-full"> Delete</button>
+
 </form>
 <form action="{{route('tweets.destroy',$tweet ->id) }}" method="POST"
 class="flex space-x-2">
-    
+    @csrf
     @method('DELETE')
-
+    <button type= "submit" class=" bg-orange-400 text-blue-900 py-3 px-4 rounded-full"> Delete</button>
 
 
 </form>

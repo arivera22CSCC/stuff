@@ -10,11 +10,7 @@ class PostPolicy
     {
     return $user->id === $tweet->user_id;
     }
-    public function destroy(User $user, Tweet $tweet)
-    {
-        return $user->id === $tweet->user_id;
-    }
-    public function edit(User $user, Tweet $tweet)
+    public function delete(User $user, Tweet $tweet)
     {
         return $user->id === $tweet->user_id;
     }

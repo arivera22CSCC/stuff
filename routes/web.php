@@ -25,12 +25,15 @@ Route::get('/', function () {
 });
 
 Route::resource('tweets',TweetController::class); 
-
+Route::get('/login',[LoginController::class, 'showLoginForm'])->name('login');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware(['auth'])->group(function(){
-Route::get('welcome',[TweetController::class, 'index'])->name('welcomepage');
+Route::get('/welcome',[TweetController::class, 'index'])->name('welcome-page');
 Route::post('/logout',[LoginController::class,'logout'])->name("logout");
-
+Route::get('/tweets',[TweetController::class, 'index'])->name('tweets.index');
+Route::post('/tweets',[TweetController::class, 'store'])->name('tweets.index');
+Route::delete('/tweets/{id}', [TweetController::class, 'destroy'])->name('tweets.destroy');
+Route::get('/tweets/{tweet}/edit', 'TweetController@edit')->name('tweets.edit');
 });

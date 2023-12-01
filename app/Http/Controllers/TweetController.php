@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 class TweetController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -26,14 +29,15 @@ class TweetController extends Controller
      */
     public function create()
     {
-        return view('tweets.create');
+         return view('tweets.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    { 
+    {  /* $user=Auth::user();
+        $user->tweets()->create(['body'=>$request->input('body'),]);*/
         $data = $request->all();
         Tweet::create($data);
         return redirect('/');
@@ -54,12 +58,7 @@ class TweetController extends Controller
     }
     public function update(Request $request, Tweet $tweet)
     {
-        $this->authorize('update', $tweet);
-
-        $data = $request->validate([
-            'content' => 'required|max:255',
-        ]);
-
+       $data = $request-> all();
         $tweet->update($data);
 
         return redirect('/');
@@ -67,8 +66,6 @@ class TweetController extends Controller
 
     public function destroy(Tweet $tweet)
     {
-       
-
         $tweet->delete();
 
         return redirect('/');
